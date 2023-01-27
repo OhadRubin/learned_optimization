@@ -85,6 +85,7 @@ class WeightDecayWrapper(opt_base.Optimizer):
 
     if self.add_to_loss:
       assert self.weight_decay is not None
+      assert loss is not None
       l2 = [jnp.sum(p**2) for p in jax.tree_util.tree_leaves(ps)]
       loss = loss + sum([x * self.weight_decay for x in l2 if x is not None])
 
